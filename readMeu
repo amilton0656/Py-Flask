@@ -1,0 +1,7 @@
+py -m venv .venv
+.\.venv\Scripts\activate
+
+pip install flask
+
+set FLASK_APP=app.py
+set FLASK_ENV=development
