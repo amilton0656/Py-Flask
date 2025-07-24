@@ -1,17 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML com Flask</title>
-</head>
-<body>
-    <h1>HTML com Flask!</h1>  
+{% extends "base.html" %}
+
+{% block title %}Lista de Frutas{% endblock title %}
+
+{% block content %}
+    <h1 style="text-align: center:">Lista de Frutas</h1>  
     <hr>
-    <ol>
+    <ul class="list-group">
         {% for fruta in frutas %}
-        <li>{{fruta}}</li>
+            <li class="list-group-item">{{fruta}}</li>
         {% endfor %}
-    </ol>
-</body>
-</html>
+    </ul>
+    <br>
+    <form action="{{ url_for('principal') }}" method="POST">
+        <div class="form-group">
+            <label for="exemploFruta">Fruta:</label>
+            <input class="form-control" id="exemploFruta" type="text" name="fruta" placeholder="Digite o nome de uma fruta" required>
+
+        </div>
+        <br><br>
+        <button class="btn btn-success">Adicionar fruta</button>
+    </form>
+{% endblock content %}

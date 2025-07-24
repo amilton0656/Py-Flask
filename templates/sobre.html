@@ -1,20 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre</title>
-</head>
-<body>
-    <h1>Sobre mim</h1>  
+{% extends "base.html" %}
+
+{% block title %}Diário do Professor{% endblock title %}
+
+{% block content %}
+    <h1 style="text-align: center:">Diário do Professor</h1>  
     <hr>
-    
-        {% for aluno, nota in notas.items() %} 
+    <ol>
+        {% for registro in registros %} 
             <details>
-                <summary>{{aluno}}</summary>
-                <p>{{nota}}</p>
+                <summary>{{registro.aluno}}</summary>
+                <p>{{registro.nota}}</p>
             </details> 
         {% endfor %}
     </ol>
-</body>
-</html>
+    <br>
+    <form action="{{ url_for('sobre') }}" method="POST">
+        <div class="form-group">
+            <label for="exemploAluno">Aluno: </label>
+            <input class="form-control" id="exemploAluno" type="text" name="aluno" placeholder="Digite o nome de um aluno" required>
+            <br>
+            <label for="exemploNota">Nota:</label>
+            <input class="form-control" id="exemploNota" type="text" name="nota" placeholder="Digita uma nota" required>
+        </div>
+        <br><br>
+        <button class="btn btn-success">Incluir aluno</button>
+    </form>
+{% endblock content %}

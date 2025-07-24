@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Cursos{% endblock title %}
+
+{% block content %}
+    <h1 style="text-align: center:">Lista de Cursos</h1>  
+    <hr>
+    <a href="{{ url_for('add_curso')}}" class="btn btn-secondary">Adicionar curso</a>
+    <br><br>
+    <table class="table">
+      <thead class="table-primary">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome do Curso</th>
+          <th scope="col">Descrição</th>
+          <th scope="col">CH</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for curso in cursos.items %}
+            
+            <tr>
+              <th scope="row">{{curso.id}}</th>
+              <td>{{curso.nome}}</td>
+              <td>{{curso.descricao}}</td>
+              <td>{{curso.ch}}</td>
+              <td>
+                <a href="{{curso.id}}/edit_curso" class="btn btn-secondary btn-xs">Editar</a>
+                <a href="{{curso.id}}/remove_curso" onclick="return confirm('Tem certeza?')" class="btn btn-danger btn-xs">Excluir</a>
+              </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+{% if cursos.has_prev %}
+    <a href="{{url_for('listar_cursos', page=cursos.prev_num)}}">Cursos Anteriores</a>
+{% else %}   
+    Cursos listados    
+{% endif %}
+{% if cursos.has_next %}
+    <a href="{{url_for('listar_cursos', page=cursos.next_num)}}">Próximos Cursos</a>
+{% else %}
+    Cursos listados
+{% endif %}
+{% endblock content %}

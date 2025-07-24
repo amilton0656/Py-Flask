@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Curso{% endblock title %}
+
+{% block content %}
+    <h1 style="text-align: center:">Editar Curso</h1>  
+    <hr>
+    {%- for mensagem in get_flashed_messages() %}
+        <div class="alert alert-danger">
+            {{mensagem}}
+        </div>
+    {%- endfor %}
+    <form class="form-control" action="{{ url_for('edit_curso', id=curso.id) }}" method="POST">
+
+        <label for="exemploNome">Nome do Curso:</label>
+        <input class="form-control" id="exemploNome" type="text" value="{{curso.nome}}" name="nome" required >
+        <br>
+
+        <label for="exemploDescricao">Descrição do Curso:</label>
+        <textarea class="form-control" id="exemploDescricao" name="descricao" required>{{curso.descricao}}</textarea>
+        <br>
+
+        <label for="exemploCH">Carga horária do Curso:</label>
+        <input class="form-control" id="exemploCH" type="text" value="{{curso.ch}}" name="ch" required>
+
+        <br>
+        <button class="btn btn-success">Atualizar</button>
+    </form>
+
+{% endblock content %}
